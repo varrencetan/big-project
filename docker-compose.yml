@@ -1,29 +1,55 @@
-version: '3.8'
-
+version: '3.6'
 services:
   database:
     container_name: cilist-db
-    image: varrence/cilist-db:${GIT_COMMIT_SHORT}
-
+    image: varrence/db-cilist:${GIT_COMMIT_SHORT}
   backend:
-    image: varrence/cilist-be:${GIT_COMMIT_SHORT}
+    image: varrence/backend-cilist:${GIT_COMMIT_SHORT}
     ports:
-      - "5000:5000"
+    - "5000:5000"
     depends_on:
-      - database
+    - database
     environment:
-      - BASE_URL_PORT=5000
-      - MYSQL_ROOT_PASSWORD=s3k0l4hd3v0p5
-      - DATABASE_USERNAME=people
-      - DATABASE_PASSWORD=people
-      - DATABASE_DATABASE=people
-      - DATABASE_HOST=database
-      - DATABASE_PORT=3306
-
+    - BASE_URL_PORT=5000
+    - MYSQL_ROOT_PASSWORD=s3k0l4hd3v0p5
+    - DATABASE_USERNAME=people
+    - DATABASE_PASSWORD=people
+    - DATABASE_DATABASE=people
+    - DATABASE_HOST=database
+    - DATABASE_PORT=3306
   frontend:
-    image: varrence/cilist-fe:${GIT_COMMIT_SHORT}
+    image: varrence/frontend-cilist:${GIT_COMMIT_SHORT}
     ports:
-      - "3000:3000"
+    - "3000:3000"
     environment:
-      - REACT_APP_BACKEND_URL=http://13.212.139.78:5000
+    - REACT_APP_BACKEND_URL=http://localhost:5000
+    
+#version: '3.8'
+
+#services:
+#  database:
+#    container_name: cilist-db
+#    image: varrence/cilist-db:${GIT_COMMIT_SHORT}
+
+#  backend:
+#    image: varrence/cilist-be:${GIT_COMMIT_SHORT}
+#    ports:
+#      - "5000:5000"
+#    depends_on:
+#      - database
+#    environment:
+#      - BASE_URL_PORT=5000
+#      - MYSQL_ROOT_PASSWORD=s3k0l4hd3v0p5
+#      - DATABASE_USERNAME=people
+#      - DATABASE_PASSWORD=people
+#      - DATABASE_DATABASE=people
+#      - DATABASE_HOST=database
+#      - DATABASE_PORT=3306
+
+#  frontend:
+#    image: varrence/cilist-fe:${GIT_COMMIT_SHORT}
+#    ports:
+#      - "3000:3000"
+#    environment:
+#      - REACT_APP_BACKEND_URL=http://13.212.139.78:5000
 # ganti ip public remote server
