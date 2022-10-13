@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configmap-staging-fe
+  namespace: staging
+  labels: 
+    app: fe-staging
+data:
+  env: |
+    REACT_APP_BACKEND_URL=https://be-staging.cilsy.my.id
